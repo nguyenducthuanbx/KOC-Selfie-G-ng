@@ -1,0 +1,7 @@
+{
+  "name": "KOC Selfie Gương_api",
+  "description": "An advanced AI-powered tool to generate ultra-realistic mirror selfies in room settings, maintaining face identity and outfit details using Gemini 2.5/3 Image models.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
