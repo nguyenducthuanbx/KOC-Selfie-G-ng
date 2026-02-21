@@ -29,7 +29,8 @@ const App: React.FC = () => {
     kocImage: null,
     outfitImage: null,
     scene: SceneChoice.BED_MINIMAL,
-    additionalPrompt: ''
+    additionalPrompt: '',
+    holdingPhone: true
   });
 
   const [apiConfig, setApiConfig] = useState<ApiKeyConfig>({
@@ -166,7 +167,8 @@ const App: React.FC = () => {
           config.kocImage,
           config.outfitImage,
           config.scene,
-          config.additionalPrompt
+          config.additionalPrompt,
+          config.holdingPhone
         );
         
         successResult = result;
@@ -394,6 +396,35 @@ const App: React.FC = () => {
               image={config.outfitImage} 
               onImageChange={(val) => setConfig(prev => ({ ...prev, outfitImage: val }))}
             />
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
+              <Camera className="w-4 h-4 text-indigo-500" />
+              Kiểu chụp
+            </label>
+            <div className="flex gap-4 p-3 bg-slate-50 border border-slate-200 rounded-2xl">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input 
+                  type="radio" 
+                  name="holdingPhone" 
+                  checked={config.holdingPhone} 
+                  onChange={() => setConfig(prev => ({ ...prev, holdingPhone: true }))}
+                  className="w-4 h-4 text-indigo-600 focus:ring-indigo-500 border-slate-300"
+                />
+                <span className="text-sm font-medium text-slate-700">Cầm điện thoại (Selfie)</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input 
+                  type="radio" 
+                  name="holdingPhone" 
+                  checked={!config.holdingPhone} 
+                  onChange={() => setConfig(prev => ({ ...prev, holdingPhone: false }))}
+                  className="w-4 h-4 text-indigo-600 focus:ring-indigo-500 border-slate-300"
+                />
+                <span className="text-sm font-medium text-slate-700">Không cầm điện thoại (Tạo dáng)</span>
+              </label>
+            </div>
           </div>
 
           <div className="space-y-2">

@@ -25,7 +25,8 @@ export const generateMirrorSelfie = async (
   kocBase64: string,
   outfitBase64: string,
   scene: SceneChoice,
-  additionalPrompt: string
+  additionalPrompt: string,
+  holdingPhone: boolean
 ): Promise<string> => {
   if (!apiKey) {
     throw new Error("API Key is missing. Please configure it in settings.");
@@ -39,6 +40,10 @@ export const generateMirrorSelfie = async (
   const cleanKoc = kocBase64.replace(/^data:image\/[a-z]+;base64,/, "");
   const cleanOutfit = outfitBase64.replace(/^data:image\/[a-z]+;base64,/, "");
 
+  const phonePrompt = holdingPhone 
+    ? `- VỊ TRÍ ĐIỆN THOẠI: Tay cầm điện thoại selfie phải được đặt ở vị trí THẤP (tầm ngực) hoặc LỆCH SANG BÊN CẠNH.\n- HIỂN THỊ KHUÔN MẶT: Phải hiển thị đầy đủ 100% khuôn mặt người mẫu trong gương. TUYỆT ĐỐI KHÔNG ĐỂ ĐIỆN THOẠI HAY CÁNH TAY CHE KHUẤT BẤT KỲ BỘ PHẬN NÀO CỦA KHUÔN MẶT (mắt, mũi, miệng, cằm phải rõ ràng).`
+    : `- KHÔNG CẦM ĐIỆN THOẠI: Người mẫu tạo dáng tự nhiên trước gương (tạo dáng thời trang, để tay vào túi quần, hoặc buông thõng tự nhiên). TUYỆT ĐỐI KHÔNG CÓ ĐIỆN THOẠI TRONG HÌNH.\n- HIỂN THỊ KHUÔN MẶT: Phải hiển thị đầy đủ 100% khuôn mặt người mẫu trong gương.`;
+
   const prompt = `
 YÊU CẦU CHẤT LƯỢNG HÌNH ẢNH SIÊU CẤP (ULTRA HD - 1080P RESOLUTION):
 - Độ sắc nét: Cực cao, mọi chi tiết đều phải rõ ràng (Super Sharp, High Fidelity).
@@ -46,8 +51,7 @@ YÊU CẦU CHẤT LƯỢNG HÌNH ẢNH SIÊU CẤP (ULTRA HD - 1080P RESOLUTION)
 - Chân thực: Tái tạo cấu trúc da chân thực, chất liệu vải chi tiết, ánh sáng phản chiếu trong gương trong vắt (crystal clear reflection).
 
 QUY TẮC BỐ CỤC "KHÔNG CHE MẶT" TUYỆT ĐỐI:
-- VỊ TRÍ ĐIỆN THOẠI: Tay cầm điện thoại selfie phải được đặt ở vị trí THẤP (tầm ngực) hoặc LỆCH SANG BÊN CẠNH.
-- HIỂN THỊ KHUÔN MẶT: Phải hiển thị đầy đủ 100% khuôn mặt người mẫu trong gương. TUYỆT ĐỐI KHÔNG ĐỂ ĐIỆN THOẠI HAY CÁNH TAY CHE KHUẤT BẤT KỲ BỘ PHẬN NÀO CỦA KHUÔN MẶT (mắt, mũi, miệng, cằm phải rõ ràng).
+${phonePrompt}
 - KHUÔN MẶT: Sử dụng chính xác 100% các đường nét và đặc điểm từ ảnh tham chiếu 1 (KOC).
 
 TRANG PHỤC & BỐI CẢNH:

@@ -87,6 +87,7 @@ export interface AppConfig {
   outfitImage: string | null;
   scene: SceneChoice;
   additionalPrompt: string;
+  holdingPhone: boolean;
 }
 
 export interface ApiKeyConfig {
