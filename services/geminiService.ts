@@ -33,6 +33,9 @@ export const generateMirrorSelfie = async (
 
   const ai = new GoogleGenAI({ apiKey: apiKey });
   
+  // Map 'nano-banana' to the actual model name 'gemini-2.5-flash-image'
+  const actualModel = model === 'nano-banana' ? 'gemini-2.5-flash-image' : model;
+  
   const cleanKoc = kocBase64.replace(/^data:image\/[a-z]+;base64,/, "");
   const cleanOutfit = outfitBase64.replace(/^data:image\/[a-z]+;base64,/, "");
 
@@ -66,7 +69,7 @@ LƯU Ý CUỐI CÙNG: Đây là ảnh chất lượng 1080p, yêu cầu độ tr
   while (retries > 0) {
     try {
       const response = await ai.models.generateContent({
-        model: model,
+        model: actualModel,
         contents: {
           parts: [
             { inlineData: { data: cleanKoc, mimeType: 'image/png' } },

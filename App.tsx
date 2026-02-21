@@ -226,7 +226,7 @@ const App: React.FC = () => {
 
         <div className="inline-flex items-center space-x-2 px-4 py-1.5 bg-green-50 text-green-600 rounded-full text-xs font-bold mb-4 uppercase tracking-wider border border-green-100">
           <Zap className="w-3 h-3 fill-current" />
-          <span>{apiConfig.activeModel === GeminiModel.PRO_3_PREVIEW ? 'Gemini 3 Pro' : 'Gemini 2.5 Flash'} • Ultra Sharp 1080p Edition</span>
+          <span>{apiConfig.activeModel === GeminiModel.PRO_3_PREVIEW ? 'Gemini 3 Pro' : apiConfig.activeModel === GeminiModel.NANO_BANANA ? 'Nano Banana' : 'Gemini 2.5 Flash'} • Ultra Sharp 1080p Edition</span>
         </div>
         <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight text-center">
           KOC <span className="text-indigo-600">Selfie Gương</span>
@@ -269,9 +269,24 @@ const App: React.FC = () => {
                   >
                     <div className="flex flex-col items-start">
                       <span className="font-bold text-sm">Gemini 2.5 Flash Image</span>
-                      <span className="text-xs opacity-70">Tốc độ nhanh, ổn định (Khuyên dùng)</span>
+                      <span className="text-xs opacity-70">Tốc độ nhanh, ổn định</span>
                     </div>
                     {apiConfig.activeModel === GeminiModel.FLASH_2_5 && <CheckCircle className="w-5 h-5" />}
+                  </button>
+
+                  <button 
+                    onClick={() => handleSelectModel(GeminiModel.NANO_BANANA)}
+                    className={`flex items-center justify-between p-3 rounded-xl border transition-all ${
+                      apiConfig.activeModel === GeminiModel.NANO_BANANA
+                      ? 'bg-indigo-50 border-indigo-500 text-indigo-700' 
+                      : 'bg-white border-slate-200 hover:border-indigo-200'
+                    }`}
+                  >
+                    <div className="flex flex-col items-start">
+                      <span className="font-bold text-sm">Nano Banana (Gemini 2.5 Flash Preview)</span>
+                      <span className="text-xs opacity-70">Model thử nghiệm mới nhất (Khuyên dùng)</span>
+                    </div>
+                    {apiConfig.activeModel === GeminiModel.NANO_BANANA && <CheckCircle className="w-5 h-5" />}
                   </button>
 
                   <button 

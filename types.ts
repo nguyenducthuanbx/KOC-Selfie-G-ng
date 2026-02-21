@@ -72,6 +72,7 @@ export enum SceneChoice {
 export enum GeminiModel {
   FLASH_2_5 = 'gemini-2.5-flash-image',
   PRO_3_PREVIEW = 'gemini-3-pro-image-preview',
+  NANO_BANANA = 'nano-banana',
 }
 
 export interface GenerationState {
